@@ -8,9 +8,7 @@ class Fighter:
 
     def __str__(self):
         return (
-            'Name: {name}, '
-            'Health: {health}, '
-            'Damage: {damage}'
+            'Name: {name}, Health: {health}, Damage: {damage}'
         ).format(
             name=self.name,
             health=self.health,
@@ -20,6 +18,9 @@ class Fighter:
     @property
     def is_alive(self) -> bool:
         return bool(self.health > 0)
+
+    def attack(self, fighter: 'Fighter') -> bool:
+        return fighter.retrieve_damage(self.damage)
 
     def retrieve_damage(self, damage: int) -> bool:
         """
@@ -33,10 +34,3 @@ class Fighter:
             return True
         else:
             return False
-
-
-class Hero(Fighter):
-    pass
-
-class Villain(Fighter):
-    pass
