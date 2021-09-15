@@ -17,16 +17,29 @@ class Fighter:
 
     @property
     def is_alive(self) -> bool:
+        """
+        Check if the fighter is alive
+
+        :return: True if the fighter is alive
+        """
         return bool(self.health > 0)
 
     def attack(self, fighter: 'Fighter') -> bool:
+        """
+        Attack a given fighter
+
+        :param fighter: fighter instance that is going to receive the damage
+        :return: True if the attacked fighter died after retrieving the damage
+        """
         return fighter.retrieve_damage(self.damage)
 
     def retrieve_damage(self, damage: int) -> bool:
         """
+        Decrease the health of the fighter subtracting the damage
+        to the current health.
 
-        :param damage:
-        :return:
+        :param damage: inflicted damage
+        :return: True if the fighter died after retrieving the damage
         """
         self.health = self.health - damage
         if self.health <= 0:

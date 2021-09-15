@@ -1,5 +1,6 @@
 from fighters.classes import Fighter
 from typing import List
+import time
 
 
 class Combat:
@@ -45,13 +46,29 @@ ______                _ _
         )
 
     def start(self):
+        """
+        Simulate a turn based combat. First, the fighters will attack the final boss.
+        If the final boss is alive after the fighters attack, the final boss will attack the fighters.
+        """
         while self.final_boss.is_alive and self.fighters_still_alive:
-            # First, the heroes attack the final boss
-            for hero in self.fighters:
-                hero.attack(self.final_boss)
+            # First, the fighters attack the final boss
+            for fighter in self.fighters:
+                print('\nFighters are starting their attack!!')
+                print('Fighter {} attacked final boss {}'.format(fighter.name, self.final_boss.name))
+
+                fighter.attack(self.final_boss)
+
+                print('Boss health: ', self.final_boss.health)
+                time.sleep(0.5)
 
             # Then, if the final boss is alive he attacks the fighters
             if self.final_boss.is_alive:
-                for hero in self.fighters:
-                    if hero.is_alive:
-                        self.final_boss.attack(hero)
+                print('\nFinal boss is starting his attack!!')
+                for fighter in self.fighters:
+                    if fighter.is_alive:
+                        print('Boss {} attacked fighter {}'.format(self.final_boss.name, fighter.name))
+
+                        self.final_boss.attack(fighter)
+
+                        print('Fighter health: ', fighter.health)
+                        time.sleep(0.5)
